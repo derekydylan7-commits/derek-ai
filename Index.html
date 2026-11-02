@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derek AI</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f8ff;
+  color: #17243b;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #dce5f2;
+}
+
+.robot {
+  width: 45px;
+  height: 45px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #168cff, #8ce5ff);
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+}
+
+header h2 {
+  margin: 0;
+  color: #147ee8;
+}
+
+header small {
+  color: #718096;
+}
+
+#dark {
+  margin-left: auto;
+  border: none;
+  background: #eaf2ff;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.welcome {
+  text-align: center;
+  margin: 50px auto 30px;
+}
+
+.bigrobot {
+  font-size: 75px;
+}
+
+.welcome h1 {
+  color: #147ee8;
+}
+
+.welcome p {
+  color: #718096;
+}
+
+.message {
+  padding: 13px 16px;
+  border-radius: 17px;
+  margin: 12px 0;
+  max-width: 85%;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.bot {
+  background: white;
+  border: 1px solid #e1eafa;
+  margin-right: auto;
+}
+
+.user {
+  background: #167ee8;
+  color: white;
+  margin-left: auto;
+}
+
+footer {
+  background: white;
+  padding: 13px;
+  display: flex;
+  gap: 9px;
+  border-top: 1px solid #dce5f2;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #d6e1f0;
+  border-radius: 15px;
+  outline: none;
+  font-size: 16px;
+}
+
+button.send {
+  border: none;
+  background: #147ee8;
+  color: white;
+  border-radius: 14px;
+  padding: 0 19px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+body.dark {
+  background: #101827;
+  color: white;
+}
+
+body.dark header,
+body.dark footer,
+body.dark .bot {
+  background: #1d293b;
+  border-color: #344258;
+}
+
+body.dark input {
+  background: #263449;
+  color: white;
+  border-color: #40516a;
+}
+
+body.dark #dark {
+  background: #344258;
+  color: white;
+}
+
+body.dark .welcome p {
+  color: #b5c3d8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="robot">🤖</div>
+  <div>
+    <h2>Derek AI</h2>
+    <small>Tu inteligencia artificial</small>
+  </div>
+  <button id="dark" onclick="toggleDark()">🌙</button>
+</header>
+
+<main id="chat">
+  <div class="welcome" id="welcome">
+    <div class="bigrobot">🤖</div>
+    <h1>¡Hola! Soy Derek AI</h1>
+    <p>¿Qué quieres hacer hoy?</p>
+  </div>
+</main>
+
+<footer>
+  <input id="message" placeholder="Habla con Derek AI..."
+  onkeydown="if(event.key==='Enter') sendMessage()">
+  <button class="send" onclick="sendMessage()">➤</button>
+</footer>
+
+<script>
+function sendMessage() {
+  const input = document.getElementById("message");
+  const chat = document.getElementById("chat");
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  document.getElementById("welcome")?.remove();
+
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+  userMessage.textContent = text;
+  chat.appendChild(userMessage);
+
+  input.value = "";
+
+  const botMessage = document.createElement("div");
+  botMessage.className = "message bot";
+  botMessage.textContent =
+    "¡Hola! Soy Derek AI 🤖. Todavía estoy en construcción. Pronto podré ayudarte con inteligencia artificial real.";
+  chat.appendChild(botMessage);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
